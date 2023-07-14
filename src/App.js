@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import MainMenu from "./Components/MainMenu";
+import Quiz from "./Components/Quiz";
+import EndScreen from "./Components/EndScreen";
+import Conditions from "./Components/Conditions";
+import Form from "./Components/Form";
 function App() {
+  const [score, setScore] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="heading">Quiz App</h1>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainMenu />} />
+          <Route path="/Conditions" element={<Conditions />} />
+          <Route
+            path="/Quiz"
+            element={<Quiz score={score} setScore={setScore} />}
+          />
+          <Route path="/form" element={<Form />} />
+          <Route
+            path="/EndScreen"
+            element={<EndScreen score={score} setScore={setScore} />}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
